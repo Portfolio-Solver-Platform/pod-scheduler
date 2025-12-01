@@ -1,0 +1,11 @@
+apiVersion: v2
+name: pod-scheduler
+description: pod scheduler for managing manually if more pods are needed, where HPA is not enough
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+
+dependencies:
+  - name: keda
+    version: 2.18.1  
+    repository: "@kedacore"

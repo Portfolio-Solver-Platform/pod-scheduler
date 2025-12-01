@@ -1,0 +1,29 @@
+apiVersion: skaffold/v4beta13
+kind: Config
+metadata:
+  name: pod-scheduler-skaffold
+profiles:
+  - name: dev
+    activation:
+      - command: dev
+    deploy:
+      helm:
+        releases:
+          - name: pod-scheduler
+            chartPath: helm/
+            namespace: pod-scheduler
+            valuesFiles:
+              - helm/values.yaml
+              - helm/values-dev.yaml
+  - name: prod
+    deploy:
+      helm:
+        releases:
+          - name: pod-scheduler
+            chartPath: helm
+            namespace: pod-scheduler
+            valuesFiles:
+              - helm/values.yaml
+              - helm/values-prod.yaml
+            wait: true
+            upgradeOnChange: true
